@@ -8,7 +8,8 @@
   "scripts": {
     "start:three": "http-server -o /threejs -S -C ./certs/localhost.pem -K ./certs/localhost-key.pem",
     "start:aframe": "http-server -o /aframe -S -C ./certs/localhost.pem -K ./certs/localhost-key.pem",
-    "start:webgl": "http-server -o /webgl"
+    "start:webgl": "http-server -o /webgl",
+    "start:webgpu": "http-server -o /webgpu"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
