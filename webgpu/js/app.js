@@ -16,16 +16,16 @@ function initGPU() {
     gpu = canvas.getContext('webgpu');
 
     if (!navigator.gpu || !gpu) {
-        throw new Error('WebGPU не поддерживается в вашем браузере!');
+        throw new Error('WebGPU не поддерживается в вашем браузере...');
     }
 }
 // 2. Инициализация адаптера и устройства
 async function initDevice() {
-    adapter = await navigator.gpu.requestAdapter();
+    adapter = await navigator.gpu.requestAdapter({ xrCompatible: true });
     device = await adapter.requestDevice();
 }
 // 3. Настройка формата вывода
-function configureContext() {
+function configureOutput() {
     format = navigator.gpu.getPreferredCanvasFormat();
     gpu.configure({
         device,
@@ -106,16 +106,23 @@ function sendToGPU() {
     device.queue.submit([commandEncoder.finish()]);
 }
 
+async function makeXRSession() {
+    const xrSession = await navigator.xr.requestSession('immersive-vr', {
+        requiredFeatures: ['webgpu'],
+    });
+}
+
 async function webGPUStart() {
     canvas = document.getElementById('webgpu-canvas');
 
     initGPU();
     await initDevice();
-    configureContext();
+    configureOutput();
     createPipeline();
     initGeometry();
     drawScene();
     sendToGPU();
+    await makeXRSession();
 }
 
 window.addEventListener('DOMContentLoaded', () => {

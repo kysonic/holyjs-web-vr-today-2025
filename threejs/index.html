@@ -1,133 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HolyJS 2025 - Web VR Today - ThreeJS Example</title>
-    <link href="./main.css" type="text/css" rel="stylesheet" />
-  </head>
-  <body>
-    <canvas id="c"></canvas>
-    <script
-      async
-      src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"
-    ></script>
-
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.155.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.155.0/examples/jsm/"
-        }
-      }
-    </script>
-
-    <script type="module">
-      import * as THREE from 'three';
-      import { VRButton } from 'three/addons/webxr/VRButton.js';
-      import Controllers from './controllers.js';
-      import {
-        createCamera,
-        createLight,
-        createCube,
-        resizeRendererToDisplaySize,
-        setEnvMaps,
-      } from './lib.js';
-
-      let canvas, renderer;
-      let scene, camera;
-      let light;
-      let cubes;
-      let controllers;
-
-      function main() {
-        canvas = document.getElementById('c');
-        renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        // Enable VR
-        renderer.xr.enabled = true;
-        document.body.appendChild(VRButton.createButton(renderer));
-
-        scene = new THREE.Scene();
-        controllers = new Controllers({
-          scene,
-          renderer,
-          options: {
-            modelUrl: '../assets/models/controllers/scene.gltf',
-          },
-        });
-
-        camera = createCamera();
-        camera.position.set(0, 1.8, 0);
-
-        light = createLight();
-        scene.add(light);
-
-        cubes = [
-          createCube(undefined, {
-            color: 0xaaccbb,
-            metalness: 1,
-            roughness: 0,
-            envMapIntensity: 1.0,
-          }),
-          createCube(undefined, {
-            color: 0xaaccbb,
-            metalness: 1,
-            roughness: 0,
-            envMapIntensity: 1.0,
-          }),
-          createCube(undefined, {
-            color: 0xaaccbb,
-            metalness: 1,
-            roughness: 0,
-            envMapIntensity: 1.0,
-          }),
-        ];
-
-        // Cubes positioning
-        cubes.forEach((cube, index) => {
-          cube.position.x = index * 2 - 2;
-          cube.position.y = 1.8;
-          cube.position.z = -2;
-          scene.add(cube);
-        });
-
-        setEnvMaps(
-          {
-            renderer,
-            url: '../assets/backgrounds/studio/studio.exr',
-          },
-          (texture) => {
-            cubes.forEach((cube, index) => {
-              cube.material.envMap = texture;
-            });
-            scene.background = texture;
-          },
-        );
-
-        renderer.setAnimationLoop(render);
-      }
-
-      function render(time) {
-        time *= 0.001;
-
-        if (resizeRendererToDisplaySize(renderer)) {
-          const canvas = renderer.domElement;
-          camera.aspect = canvas.clientWidth / canvas.clientHeight;
-          camera.updateProjectionMatrix();
-        }
-
-        cubes.forEach((cube) => {
-          cube.rotation.x = time;
-          cube.rotation.y = time;
-        });
-
-        controllers.update(cubes, time);
-
-        renderer.render(scene, camera);
-      }
-
-      main();
-    </script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HolyJS 2025 - Web VR Today - ThreeJS Example</title>
+        <link href="./css/main.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <canvas id="three-canvas"></canvas>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "https://unpkg.com/three@0.173.0/build/three.module.js",
+                    "three/addons/": "https://unpkg.com/three@0.173.0/examples/jsm/"
+                }
+            }
+        </script>
+        <script src="./js/app.js" type="module"></script>
+    </body>
 </html>

@@ -9,6 +9,10 @@ let buffer = null;
 // 1. Инициализация контекста WebGL
 function initGL() {
     gl = canvas.getContext('webgl');
+
+    if (!gl) {
+        throw new Error('WebGL не поддерживается в вашем браузере...');
+    }
 }
 
 // 2. Инициализация шейдеров

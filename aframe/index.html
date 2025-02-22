@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HolyJS 2025 - Web VR Today - A-Frame Example</title>
-    <link href="./main.css" type="text/css" rel="stylesheet" />
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <link href="./css/main.css" type="text/css" rel="stylesheet" />
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
   </head>
   <body>
     <a-scene>
@@ -15,7 +15,7 @@
       <a-box
         class="box"
         position="-2 1.8 -2"
-        material="color: #aaccbb; metalness: 1; roughness: 0; sphericalEnvMap: #studioJpg"
+        material="color: #aaccbb; metalness: 1; roughness: 0; envMap: #studioJpg"
         animation="property: rotation; to: 360 360 0; dur: 10000; easing: linear; loop: true"
         animation__mouseenter="property: scale; to: 1.3 1.3 1.3; dur: 300; startEvents: mouseenter"
         animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave"
@@ -23,7 +23,7 @@
       <a-box
         class="box"
         position="0 1.8 -2"
-        material="color: #aaccbb; metalness: 1; roughness: 0; sphericalEnvMap: #studioJpg"
+        material="color: #aaccbb; metalness: 1; roughness: 0; envMap: #studioJpg"
         animation="property: rotation; to: 360 360 0; dur: 10000; easing: linear; loop: true"
         animation__mouseenter="property: scale; to: 1.3 1.3 1.3; dur: 300; startEvents: mouseenter"
         animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave"
@@ -31,7 +31,7 @@
       <a-box
         class="box"
         position="2 1.8 -2"
-        material="color: #aaccbb; metalness: 1; roughness: 0; sphericalEnvMap: #studioJpg"
+        material="color: #aaccbb; metalness: 1; roughness: 0; envMap: #studioJpg"
         animation="property: rotation; to: 360 360 0; dur: 10000; easing: linear; loop: true"
         animation__mouseenter="property: scale; to: 1.3 1.3 1.3; dur: 300; startEvents: mouseenter"
         animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave"
