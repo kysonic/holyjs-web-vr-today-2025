@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Conf 2023 - Web VR Today - A-Frame - Component</title>
+    <link href="./main.css" type="text/css" rel="stylesheet" />
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent('scale-on-cursor-enter', {
+        schema: {
+          scale: {
+            type: 'number',
+            default: 1,
+          },
+        },
+        init() {
+          this.defaultScale = this.el.object3D.scale.clone();
+          this.mouseEnterHandler = this.onMouseEnter.bind(this);
+          this.mouseLeaveHandler = this.onMouseLeave.bind(this);
+          this.el.addEventListener('mouseenter', this.mouseEnterHandler);
+          this.el.addEventListener('mouseleave', this.mouseLeaveHandler);
+        },
+        remove() {
+          this.el.removeEventListener('mouseenter', this.mouseEnterHandler);
+          this.el.removeEventListener('mouseleave', this.mouseLeaveHandler);
+        },
+        onMouseEnter() {
+          this.el.object3D.scale.set(
+            this.data.scale,
+            this.data.scale,
+            this.data.scale,
+          );
+        },
+        onMouseLeave() {
+          this.el.object3D.scale.set(this.defaultScale.x, this.defaultScale.y, this.defaultScale.z);
+        },
+      });
+    </script>
+    <a-scene>
+      <a-entity
+        id="box"
+        geometry="primitive: box; width: 1; height: 1; depth: 1; color: #AACCBB"
+        position="1 2 -5"
+        scale-on-cursor-enter="scale: 2"
+      ></a-entity>
+      <a-camera position="0 2 0">
+        <a-cursor color="#FF0000" />
+      </a-camera>
+    </a-scene>
+    <script>
+      // Change component data dynamically through set attribute
+      setTimeout(() => {
+        document
+          .getElementById('box')
+          .setAttribute('scale-on-cursor-enter', { scale: 3 });
+      }, 2000);
+      // Remove entity from scene through removing appropriate web component from DOM
+      setTimeout(() => {
+        const boxEntity = document.getElementById('box');
+        boxEntity.parentElement.removeChild(boxEntity);
+      }, 5000);
+    </script>
+  </body>
+</html>

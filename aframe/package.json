@@ -1,0 +1,14 @@
+{
+  "name": "openconf-webvrtoday-aframe",
+  "version": "0.0.1",
+  "description": "Test scene for conference",
+  "main": "index.js",
+  "author": "Miroshnichenko Anton",
+  "license": "ISC",
+  "scripts": {
+    "start": "http-server -S -C ../certs/localhost.pem -K ../certs/localhost-key.pem"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "openconf-webvrtoday",
+  "version": "0.0.1",
+  "description": "Repo with examples, made for conference",
+  "main": "index.js",
+  "author": "Miroshnichenko Anton",
+  "license": "ISC",
+  "scripts": {
+    "start:three": "http-server -o /threejs -S -C ./certs/localhost.pem -K ./certs/localhost-key.pem",
+    "start:aframe": "http-server -o /aframe -S -C ./certs/localhost.pem -K ./certs/localhost-key.pem",
+    "start:webgl": "http-server -o /webgl"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
